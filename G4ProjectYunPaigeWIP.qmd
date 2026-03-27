@@ -83,48 +83,6 @@ RentWIP <- RentWIP %>%
       TRUE ~ amenities
     )
   )
-
-RentWIP_wide <- RentWIP %>%
-  separate(
-    amenities,
-    into = paste0("amenity_", 1:20),
-    sep = ",",
-    fill = "right",
-    remove = FALSE
-  )
-
-RentWIP_wide <- RentWIP_wide %>%
-  mutate(
-    amenity_1 = case_when(
-      amenity_1 == "null" ~ NA_character_,
-      TRUE ~ amenity_1
-    )
-  )
-
-RentWIP_wide <- RentWIP %>%
-  mutate(
-    amenities = case_when(
-      is.na(amenities) ~ NA_character_,
-      amenities == "" ~ NA_character_,
-      amenities == "null" ~ NA_character_,
-      TRUE ~ amenities
-    )
-  ) %>%
-  separate(
-    amenities,
-    into = paste0("amenity_", 1:20),
-    sep = ",",
-    fill = "right",
-    remove = FALSE
-  ) %>%
-  mutate(
-    amenity_1 = case_when(
-      is.na(amenities) ~ NA_character_,
-      amenity_1 == "" ~ NA_character_,
-      TRUE ~ amenity_1
-    )
-  )
-
 ```
 
 
