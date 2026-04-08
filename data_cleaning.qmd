@@ -1,0 +1,100 @@
+---
+title: "Data Cleaning Process"
+author: "DATA 222 Group"
+format: pdf
+editor: source
+---
+
+## Data Cleaning Overview
+
+This file shows how the original apartment dataset was cleaned and prepared for analysis.
+
+```{r}
+library(tidyverse)
+library(readr)
+```
+
+## Load Raw Data
+
+```{r}
+RentWIP <- read_delim("apartments_for_rent_classified_10K.csv", delim = ";")
+```
+
+## Clean Column Names
+
+```{r}
+RentWIP <- RentWIP %>%
+  rename_with(tolower)
+```
+
+## Convert Data Types
+
+```{r}
+RentWIP <- RentWIP %>%
+  mutate(
+    price = as.numeric(price),
+    square_feet = as.numeric(square_feet),
+    bathrooms = as.numeric(bathrooms),
+    bedrooms = suppressWarnings(as.numeric(bedrooms))
+  )
+```
+
+## Clean Text Fields
+
+```{r}
+RentWIP <- RentWIP %>%
+  mutate(
+    title = str_squish(str_to_sentence(title)),
+    body = str_squish(body),
+    amenities = str_squish(str_to_lower(amenities))
+  )
+```
+
+## Convert to Factors
+
+```{r}
+RentWIP <- RentWIP %>%
+  mutate(
+    pets_allowed = as.factor(pets_allowed),
+    state = as.factor(state),
+    cityname = as.factor(cityname),
+    fee = as.factor(fee)
+  )
+```
+
+## Fix Invalid "null" Values
+
+```{r}
+RentWIP <- RentWIP %>%
+  mutate(
+    cityname = ifelse(cityname == "null", NA, cityname),
+    state = ifelse(state == "null", NA, state),
+    amenities = ifelse(amenities == "null", NA, amenities)
+  )
+```
+
+## Select Final Variables and Remove Missing Values
+
+```{r}
+clean_data <- RentWIP %>%
+  select(price, square_feet, bedrooms, bathrooms, cityname, state) %>%
+  na.omit()
+```
+
+## Save Clean Dataset
+
+```{r}
+write.csv(clean_data, "clean_apartments.csv", row.names = FALSE)
+```
+
+## Final Check
+
+```{r}
+str(clean_data)
+summary(clean_data)
+sum(is.na(clean_data))
+```
+
+## Summary
+
+The dataset was cleaned by standardizing column names, converting variables to correct data types, fixing invalid "null" values, and removing rows with missing values in the final selected variables. The cleaned dataset is saved as `clean_apartments.csv` and is ready for analysis.
