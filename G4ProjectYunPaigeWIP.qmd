@@ -48,18 +48,21 @@ RentWIP <- RentWIP %>%
 ```{r 05}
 RentWIP <- RentWIP %>%
   mutate(
-    title = str_squish(str_to_sentence(title)),
-    body = str_squish(body),
-    amenities = str_squish(str_to_lower(amenities))
+    title = str_squish(str_to_sentence(title)), #lowercases titles, removes extra spaces
+    body = str_squish(body), #removes extra spaces
+    amenities = str_squish(str_to_lower(amenities)) #makes everything lowercase and removes extra spaces
   ) 
-  RentWIP <- RentWIP %>%
+RentWIP %>% 
+  count(pets_allowed)
+
+ RentWIP <- RentWIP %>%
+  mutate(across(where(is.character), str_to_lower)) %>% #converts character columns into lowercase
   mutate(
-    pets_allowed = as.factor(pets_allowed),
+    pets_allowed = as.factor(pets_allowed), #turns the following columns into factors
     state = as.factor(state),
     cityname = as.factor(cityname),
-    fee = as.factor(fee))
-    RentWIP <- RentWIP %>%
-  mutate(across(where(is.character), str_to_lower))
+    fee = as.factor(fee)
+  )
 ```
 
 
@@ -67,11 +70,14 @@ RentWIP <- RentWIP %>%
 RentWIP <- RentWIP %>%
   mutate(
     pets_allowed = case_when(
-      pets_allowed == "Cats,Dogs" ~ "cat,dog",
-      pets_allowed == "None" ~ "None",
-      TRUE ~ "None"
+      pets_allowed == "cats,dogs" ~ "cats,dogs",
+      pets_allowed == "cats" ~ "cats",
+      pets_allowed == "dogs" ~ "dogs",
+      pets_allowed == "none" ~ "none",
+      TRUE ~ "none"
     )
-  )
+  ) #makes sure empty entries for pets_allowed are converted to 'none'
+
 ```
 
 
@@ -81,8 +87,7 @@ RentWIP <- RentWIP %>%
     amenities = case_when(
       amenities == "null" ~ NA_character_,
       TRUE ~ amenities)
-  )
-
+  ) #converts null entries in amenities column into a N/A character
 
 ```
 
@@ -96,42 +101,42 @@ RentWIP <- RentWIP %>%
       price_type == "monthly|weekly" ~ price,  
       TRUE ~ NA_real_
     )
-  )
+  ) #calculates and generates a monthly price column so that all listings are priced at a monthly rate.
 ```
 
 
 ```{r 09}
-mean_sqft  <- mean(RentWIP$square_feet, na.rm = TRUE)
+mean_sqft  <- mean(RentWIP$square_feet, na.rm = TRUE) #calc avg monthly rent and square footage
 mean_price <- mean(RentWIP$monthly_price, na.rm = TRUE)
 ggplot(RentWIP, aes(x = square_feet, y = monthly_price)) +
-  geom_point(alpha = 0.4) +
-  geom_smooth(method = "lm", se = FALSE, color = "pink") +
+  geom_point(alpha = 0.4) + #gives each point on scatter plot 40% opacity
+  geom_smooth(method = "lm", se = FALSE, color = "pink") + #can see a positive linear relationship
   coord_cartesian(
     xlim = c(mean_sqft - 500, mean_sqft + 500),
     ylim = c(mean_price - 1000, mean_price + 1000)
-  )
+  ) #adds a range of focus without dropping out outliers, focused on a range around the avg square foot and monthly rent
 ```
 
 
 ```{r 10}
 state_count <- RentWIP %>%
-  filter(state != "null") %>%
-  count(state)
-avg_count <- mean(state_count$n)
-avg_count
+  filter(state != "null") %>% #filters out any null entries for the state column
+  count(state) #counts how many listings for each state
+avg_count <- mean(state_count$n) #calculates the avg number of listings across states in this data set
+avg_count 
 ```
 
 
 ```{r 11}
 valid_states <- state_count %>%
-  filter(n >= avg_count) %>%
-  pull(state)
+  filter(n >= avg_count) %>% #only includes states from the data set that have at least an average number of listings
+  pull(state) #extracts the state name
 exp_states <- RentWIP %>%
-  filter(state %in% valid_states) %>%
-  group_by(state) %>%
-  summarize(avg_monthly_price = mean(monthly_price, na.rm = TRUE)) %>%
-  arrange(desc(avg_monthly_price)) %>%
-  slice_head(n = 25)
+  filter(state %in% valid_states) %>% #filters out states that do not have at least the avg number of listings
+  group_by(state) %>% 
+  summarize(avg_monthly_price = mean(monthly_price, na.rm = TRUE)) %>% #for each state, the avg monthly rent is calculated, ignores missing values
+  arrange(desc(avg_monthly_price)) %>% #orders avg monthly price from largest to smallest
+  slice_head(n = 25) #only show the top 25 most expensive states
 ```
 
 
@@ -151,7 +156,7 @@ ggplot(exp_states, aes(x = reorder(state, avg_monthly_price),
 
 
 ```{r 13}
-city_count <- RentWIP %>%
+city_count <- RentWIP %>% #same process from code chunk 11, but with cities instead of states
   filter(cityname != "null") %>%
   count(cityname)
 avg_citycount <- mean(city_count$n)
@@ -160,7 +165,7 @@ avg_citycount
 
 
 ```{r 14}
-valid_cities <- city_count %>%
+valid_cities <- city_count %>% #creates a vector where only cities that have at least the average number of listings to appear in this list
   filter(n >= avg_citycount) %>%
   pull(cityname)
 exp_cities <- RentWIP %>%
@@ -171,9 +176,9 @@ exp_cities <- RentWIP %>%
 
 
 ```{r 15}
-city_summary <- exp_cities %>%
+city_summary <- exp_cities %>% #generates a table with only cities that have at least the avg number of listings' avg monthly price, avg square foot, and how many listings for that city appeared in this data set.
   summarize(
-    avg_price = mean(price, na.rm = TRUE),
+    avg_price = mean(monthly_price, na.rm = TRUE),
     avg_sqft = mean(square_feet, na.rm = TRUE),
     listings = n()
   ) %>%
