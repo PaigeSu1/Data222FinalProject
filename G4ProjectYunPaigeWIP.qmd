@@ -15,7 +15,6 @@ library(ggplot2)
 library(tidyr)
 library(readr)
 RentWIP <- read_csv("C:/Users/kongy/Downloads/apartment+for+rent+classified/apartments_for_rent_classified_10K/apartments_for_rent_classified_10K.csv")
-View(RentWIP)
 ```
 
 
@@ -29,7 +28,7 @@ RentWIP <- read_delim(
 
 ```{r 03}
 RentWIP <- RentWIP %>%
-  rename_with(tolower)
+  rename_with(tolower) #converts entries into all lowercase
 head(RentWIP)
 ```
 
@@ -41,8 +40,9 @@ RentWIP <- RentWIP %>%
     square_feet = as.numeric(square_feet),
     bathrooms = as.numeric(bathrooms),
     bedrooms = suppressWarnings(as.numeric(bedrooms))
-  )
+  ) #converts these columns into numerical values
 ```
+
 
 
 ```{r 05}
@@ -180,3 +180,5 @@ city_summary <- exp_cities %>%
   arrange(desc(avg_price))
 city_summary
 ```
+
+
