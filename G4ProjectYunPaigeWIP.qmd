@@ -80,10 +80,103 @@ RentWIP <- RentWIP %>%
   mutate(
     amenities = case_when(
       amenities == "null" ~ NA_character_,
-      TRUE ~ amenities
+      TRUE ~ amenities)
+  )
+
+
+```
+
+```{r 08}
+unique(RentWIP$price_type)
+RentWIP <- RentWIP %>%
+  mutate(
+    monthly_price = case_when(
+      price_type == "monthly" ~ price,
+      price_type == "weekly" ~ price * 4.33,
+      price_type == "monthly|weekly" ~ price,  
+      TRUE ~ NA_real_
     )
   )
 ```
 
 
+```{r 09}
+mean_sqft  <- mean(RentWIP$square_feet, na.rm = TRUE)
+mean_price <- mean(RentWIP$monthly_price, na.rm = TRUE)
+ggplot(RentWIP, aes(x = square_feet, y = monthly_price)) +
+  geom_point(alpha = 0.4) +
+  geom_smooth(method = "lm", se = FALSE, color = "pink") +
+  coord_cartesian(
+    xlim = c(mean_sqft - 500, mean_sqft + 500),
+    ylim = c(mean_price - 1000, mean_price + 1000)
+  )
+```
 
+
+```{r 10}
+state_count <- RentWIP %>%
+  filter(state != "null") %>%
+  count(state)
+avg_count <- mean(state_count$n)
+avg_count
+```
+
+
+```{r 11}
+valid_states <- state_count %>%
+  filter(n >= avg_count) %>%
+  pull(state)
+exp_states <- RentWIP %>%
+  filter(state %in% valid_states) %>%
+  group_by(state) %>%
+  summarize(avg_monthly_price = mean(monthly_price, na.rm = TRUE)) %>%
+  arrange(desc(avg_monthly_price)) %>%
+  slice_head(n = 25)
+```
+
+
+
+```{r 12}
+ggplot(exp_states, aes(x = reorder(state, avg_monthly_price),
+                         y = avg_monthly_price)) +
+  geom_col(fill = "brown") +
+  coord_flip() +
+  labs(
+    title = "Top 25 Most Expensive States to Rent",
+    x = "State",
+    y = "Average Monthly Rent ($)"
+  ) +
+  theme_classic()
+```
+
+
+```{r 13}
+city_count <- RentWIP %>%
+  filter(cityname != "null") %>%
+  count(cityname)
+avg_citycount <- mean(city_count$n)
+avg_citycount
+```
+
+
+```{r 14}
+valid_cities <- city_count %>%
+  filter(n >= avg_citycount) %>%
+  pull(cityname)
+exp_cities <- RentWIP %>%
+  filter(cityname %in% valid_cities) %>%
+  group_by(cityname)
+
+```
+
+
+```{r 15}
+city_summary <- exp_cities %>%
+  summarize(
+    avg_price = mean(price, na.rm = TRUE),
+    avg_sqft = mean(square_feet, na.rm = TRUE),
+    listings = n()
+  ) %>%
+  arrange(desc(avg_price))
+city_summary
+```
