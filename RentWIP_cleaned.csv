@@ -1,18 +1,18 @@
 amenities,bathrooms,bedrooms,pets_allowed,square_feet,cityname,state,monthly_price
-NA,NA,0,none,101,washington,dc,790
-NA,NA,1,none,106,evansville,in,425
+NA,0,0,none,101,washington,dc,790
+NA,0,1,none,106,evansville,in,425
 NA,1,0,none,107,arlington,va,1390
 NA,1,0,none,116,seattle,wa,925
-NA,NA,0,none,125,arlington,va,880
+NA,0,0,none,125,arlington,va,880
 "dishwasher,elevator,patio/deck,pool,storage",1,0,none,130,manhattan,ny,2475
-NA,NA,0,none,132,venice,ca,1800
-NA,NA,0,none,136,washington,dc,840
+NA,0,0,none,132,venice,ca,1800
+NA,0,0,none,136,washington,dc,840
 refrigerator,1,0,none,138,san francisco,ca,1495
-NA,NA,0,none,141,washington,dc,890
-NA,NA,0,none,146,washington,dc,990
-NA,NA,0,none,150,washington,dc,840
-NA,NA,1,"cats,dogs",156,tucson,az,1795
-NA,NA,0,none,178,washington,dc,1090
+NA,0,0,none,141,washington,dc,890
+NA,0,0,none,146,washington,dc,990
+NA,0,0,none,150,washington,dc,840
+NA,0,1,"cats,dogs",156,tucson,az,1795
+NA,0,0,none,178,washington,dc,1090
 refrigerator,1,0,none,190,san francisco,ca,1695
 "ac,basketball,cable or satellite,gym,internet access,patio/deck,pool,refrigerator",1,1,"cats,dogs",200,new bern,nc,6754.8
 "ac,basketball,cable or satellite,gym,internet access,patio/deck,pool,refrigerator",1,1,"cats,dogs",200,new bern,nc,1560
@@ -46,7 +46,7 @@ NA,1,1,none,230,wimauma,fl,685
 NA,1,1,"cats,dogs",230,memphis,tn,525
 NA,1,0,cats,231,seattle,wa,1095
 "dishwasher,refrigerator",1,0,"cats,dogs",232,san francisco,ca,1695
-NA,NA,0,none,239,washington,dc,990
+NA,0,0,none,239,washington,dc,990
 NA,1,1,cats,240,bellingham,wa,775
 NA,1,0,"cats,dogs",243,seattle,wa,1299
 dishwasher,1,1,"cats,dogs",245,anchorage,ak,705
@@ -234,7 +234,7 @@ NA,1,1,"cats,dogs",300,grand junction,co,595
 "cable or satellite,dishwasher,garbage disposal,internet access,parking,pool,refrigerator",1,2,none,300,bloomington,in,585
 "cable or satellite,dishwasher,garbage disposal,internet access,parking,refrigerator",1,2,none,300,champaign,il,580
 NA,1,1,none,300,raleigh,nc,400
-"cable or satellite,pool,refrigerator,storage,tv",NA,NA,"cats,dogs",300,lakeland,fl,275
+"cable or satellite,pool,refrigerator,storage,tv",0,NA,"cats,dogs",300,lakeland,fl,275
 "cable or satellite,elevator,garbage disposal,parking,refrigerator,storage",1,1,"cats,dogs",301,reno,nv,1195
 "cable or satellite,elevator,garbage disposal,internet access,parking,patio/deck,refrigerator",1,1,"cats,dogs",306,reno,nv,1094
 "dishwasher,garbage disposal,parking,refrigerator",1,0,none,308,west lafayette,in,725
@@ -303,12 +303,12 @@ NA,1,1,"cats,dogs",350,philadelphia,pa,1145
 NA,1,0,none,350,chicago,il,940
 "cable or satellite,dishwasher,fireplace,internet access,parking,patio/deck,pool,refrigerator",1,2,"cats,dogs",350,westerville,oh,895
 NA,1,0,"cats,dogs",350,austin,tx,875
-NA,NA,1,"cats,dogs",350,scottsdale,az,849
+NA,0,1,"cats,dogs",350,scottsdale,az,849
 refrigerator,1,1,none,350,chicago,il,800
 NA,1,0,"cats,dogs",350,spokane,wa,710
 "parking,patio/deck",1,0,"cats,dogs",350,cumberland,md,699
 patio/deck,1,2,"cats,dogs",350,anchorage,ak,695
-NA,NA,0,none,350,syracuse,ny,600
+NA,0,0,none,350,syracuse,ny,600
 "parking,refrigerator",1,0,"cats,dogs",350,tucson,az,592
 "cable or satellite,dishwasher,elevator,garbage disposal,internet access,parking,patio/deck,refrigerator",1,1,"cats,dogs",351,portland,or,1225
 NA,1,2,none,352,austin,tx,1246
@@ -831,7 +831,7 @@ NA,1,1,none,481,austin,tx,990
 "parking,pool",1,2,"cats,dogs",483,washington,dc,1926
 NA,1,1,"cats,dogs",483,valley village,ca,1595
 "parking,pool",1,3,"cats,dogs",483,phoenix,az,875
-NA,NA,1,none,484,cleveland,oh,975
+NA,0,1,none,484,cleveland,oh,975
 "dishwasher,parking,pool",1,1,none,484,austin,tx,955
 NA,1,3,none,484,austin,tx,890
 "basketball,cable or satellite,clubhouse,dishwasher,fireplace,garbage disposal,internet access,parking,patio/deck,pool,refrigerator,tennis",1,1,"cats,dogs",484,kansas city,ks,675
@@ -1351,7 +1351,7 @@ NA,1,2,none,546,san antonio,tx,1120
 "basketball,cable or satellite,clubhouse,dishwasher,garbage disposal,internet access,parking,patio/deck,playground,pool,refrigerator,storage,tennis",1,1,"cats,dogs",546,kissimmee,fl,895
 "cable or satellite,dishwasher,garbage disposal,internet access,parking,pool,refrigerator",1,1,"cats,dogs",546,houston,tx,625
 NA,1,1,none,546,east grand forks,mn,495
-NA,NA,2,"cats,dogs",547,chicago,il,1739
+NA,0,2,"cats,dogs",547,chicago,il,1739
 "parking,patio/deck",1,1,"cats,dogs",547,chicago,il,1216
 "dishwasher,elevator,parking,pool,refrigerator",1,2,none,547,san antonio,tx,1185
 "gym,pool,storage,tennis,washer dryer",1,1,none,547,austin,tx,1000
@@ -1437,7 +1437,7 @@ NA,1,1,none,550,ogden,ia,625
 "parking,refrigerator,wood floors",1,1,none,550,springdale,ar,600
 patio/deck,1,1,none,550,lima,oh,584
 "dishwasher,parking,patio/deck,pool,refrigerator,storage",1,1,"cats,dogs",550,springfield,mo,580
-NA,NA,1,"cats,dogs",550,amarillo,tx,550
+NA,0,1,"cats,dogs",550,amarillo,tx,550
 NA,1,1,none,550,portsmouth,oh,550
 NA,1,2,"cats,dogs",550,minot,nd,545
 NA,1,1,"cats,dogs",550,minot,nd,545
@@ -1449,7 +1449,7 @@ NA,1,1,"cats,dogs",550,tulsa,ok,500
 NA,1,1,none,550,minot,nd,480
 NA,1,2,"cats,dogs",551,seattle,wa,1855
 "ac,wood floors",1,1,none,551,hackensack,nj,1250
-NA,NA,1,"cats,dogs",551,dallas,tx,1085
+NA,0,1,"cats,dogs",551,dallas,tx,1085
 NA,1,3,"cats,dogs",551,lawrence,ks,980
 "cable or satellite,clubhouse,dishwasher,elevator,garbage disposal,parking,patio/deck,playground,refrigerator",1,2,"cats,dogs",551,rochester,mn,900
 dishwasher,1,1,"cats,dogs",552,san francisco,ca,3495
@@ -1903,7 +1903,7 @@ NA,1,1,none,600,austin,tx,995
 "cable or satellite,clubhouse,dishwasher,elevator,garbage disposal,internet access,parking,patio/deck,refrigerator,storage",1,2,"cats,dogs",600,verona,wi,995
 "ac,dishwasher,garbage disposal,pool,refrigerator",1,1,"cats,dogs",600,sarasota,fl,995
 "garbage disposal,parking,refrigerator",1,2,none,600,west lafayette,in,980
-NA,NA,1,none,600,austin,tx,974
+NA,0,1,none,600,austin,tx,974
 NA,1,1,"cats,dogs",600,marietta,ga,963
 NA,1,2,"cats,dogs",600,coraopolis,pa,950
 "pool,storage,tv,washer dryer",1,2,none,600,cedar park,tx,949
@@ -1959,7 +1959,7 @@ NA,1,1,"cats,dogs",600,san antonio,tx,699
 NA,1,1,"cats,dogs",600,omaha,ne,695
 "cable or satellite,dishwasher,garbage disposal,parking,refrigerator,storage",1,1,"cats,dogs",600,saint louis,mo,690
 "ac,dishwasher,garbage disposal,gated,gym,parking,patio/deck,playground,pool,refrigerator,storage",1,1,"cats,dogs",600,las vegas,nv,675
-NA,NA,1,"cats,dogs",600,rockford,il,650
+NA,0,1,"cats,dogs",600,rockford,il,650
 NA,1,1,"cats,dogs",600,glendale,az,645
 NA,1,1,cats,600,ames,ia,645
 "basketball,clubhouse,dishwasher,patio/deck,playground,pool,refrigerator,storage,tennis",1,3,"cats,dogs",600,indianapolis,in,639
@@ -3438,7 +3438,7 @@ parking,1,1,"cats,dogs",700,upper darby,pa,825
 "dishwasher,garbage disposal,parking,patio/deck,pool,refrigerator",1,1,"cats,dogs",700,wilmington,de,825
 dishwasher,1,1,none,700,san antonio,tx,824
 "ac,basketball,cable or satellite,clubhouse,dishwasher,gym,patio/deck,playground,pool,refrigerator,washer dryer",1,1,none,700,bostic,nc,823
-NA,NA,1,"cats,dogs",700,kokomo,in,800
+NA,0,1,"cats,dogs",700,kokomo,in,800
 NA,1,1,cats,700,omaha,ne,795
 NA,1,1,"cats,dogs",700,omaha,ne,785
 NA,1,1,"cats,dogs",700,slidell,la,775
@@ -3510,7 +3510,7 @@ NA,1,1,"cats,dogs",703,charlotte,nc,1000
 "clubhouse,gym,parking,tennis",1,1,none,703,arlington,tx,965
 dishwasher,1,1,none,703,san antonio,tx,830
 NA,1,1,"cats,dogs",703,minot,nd,825
-"ac,cable or satellite,dishwasher,elevator,refrigerator,wood floors",NA,2,none,704,new york,ny,3950
+"ac,cable or satellite,dishwasher,elevator,refrigerator,wood floors",0,2,none,704,new york,ny,3950
 NA,1,1,none,704,san francisco,ca,3608
 NA,1,2,none,704,newport beach,ca,2795
 "dishwasher,elevator,internet access,parking,pool,refrigerator",1,1,"cats,dogs",704,austin,tx,1806
@@ -3599,7 +3599,7 @@ pool,1,1,none,710,denver,co,1205
 "dishwasher,garbage disposal,parking,patio/deck,playground,pool,refrigerator",1,1,"cats,dogs",710,urbandale,ia,760
 "cable or satellite,dishwasher,elevator,parking,playground,refrigerator,storage",1,1,none,710,mankato,mn,668
 "basketball,cable or satellite,dishwasher,elevator,hot tub,internet access,patio/deck,playground,pool,refrigerator,tennis",1,3,"cats,dogs",710,springfield,mo,615
-NA,NA,1,"cats,dogs",710,amarillo,tx,610
+NA,0,1,"cats,dogs",710,amarillo,tx,610
 "ac,cable or satellite,dishwasher,patio/deck,refrigerator,storage",1,1,none,710,east pittsburgh,pa,555
 NA,1,1,none,711,birmingham,al,1865
 "elevator,parking,pool,storage",1,1,"cats,dogs",711,houston,tx,1420
@@ -3838,7 +3838,7 @@ NA,1,1,"cats,dogs",725,omaha,ne,735
 "patio/deck,playground,pool,wood floors",1,1,none,725,dallas,tx,725
 NA,1,1,"cats,dogs",725,omaha,ne,715
 "cable or satellite,dishwasher,garbage disposal,parking,patio/deck,refrigerator",1,1,"cats,dogs",725,wamego,ks,685
-NA,NA,1,"cats,dogs",725,wichita falls,tx,565
+NA,0,1,"cats,dogs",725,wichita falls,tx,565
 "clubhouse,gym,parking,patio/deck,playground,storage,washer dryer",1,1,"cats,dogs",726,renton,wa,1653
 "patio/deck,playground,pool,washer dryer,wood floors",1,1,none,726,cedar park,tx,1339
 NA,1,1,"cats,dogs",726,charlotte,nc,1199
@@ -5049,7 +5049,7 @@ NA,1,1,none,808,baltimore,md,1295
 "clubhouse,gym,pool",1,1,none,808,raleigh,nc,953
 "dishwasher,gated,playground,tennis",1,1,"cats,dogs",808,greenville,nc,830
 refrigerator,1,2,none,808,raytown,mo,820
-NA,NA,2,"cats,dogs",808,amarillo,tx,650
+NA,0,2,"cats,dogs",808,amarillo,tx,650
 "dishwasher,patio/deck",2,3,none,808,champaign,il,400
 NA,1,1,none,809,san francisco,ca,5525
 NA,1,1,"cats,dogs",809,sherman oaks,ca,2195
@@ -5530,7 +5530,7 @@ NA,1,2,"cats,dogs",850,pontiac,mi,825
 "dishwasher,internet access,parking,refrigerator",1,2,"cats,dogs",850,kansas city,mo,795
 NA,1,2,cats,850,null,null,780
 "cable or satellite,clubhouse,dishwasher,parking,playground,pool,refrigerator,storage",2,2,"cats,dogs",850,louisville,ky,775
-"parking,pool",NA,2,"cats,dogs",850,boulder,co,775
+"parking,pool",0,2,"cats,dogs",850,boulder,co,775
 "clubhouse,gym,playground,pool",1,1,none,850,hillsborough,nc,775
 NA,1,3,none,850,ames,ia,750
 "cable or satellite,dishwasher,garbage disposal,internet access,parking,patio/deck,playground,pool,refrigerator,tennis",1,1,"cats,dogs",850,west des moines,ia,730
@@ -6011,7 +6011,7 @@ NA,1,2,none,900,oroville,ca,935
 "ac,parking,playground,storage",1,2,none,900,coraopolis,pa,900
 NA,1,1,none,900,oak island,nc,899
 dishwasher,1,1,"cats,dogs",900,anchorage,ak,898
-NA,NA,1,none,900,baltimore,md,890
+NA,0,1,none,900,baltimore,md,890
 "parking,refrigerator",1,2,none,900,calumet city,il,875
 "dishwasher,fireplace,garbage disposal,parking,patio/deck,refrigerator",1,2,"cats,dogs",900,lafayette,in,870
 "ac,washer dryer,wood floors",1,2,"cats,dogs",900,delaware,oh,850
@@ -7510,7 +7510,7 @@ NA,1,2,"cats,dogs",1100,aberdeen,md,1025
 NA,2,2,none,1100,baton rouge,la,1000
 "dishwasher,refrigerator",2,2,none,1100,cape coral,fl,1000
 "dishwasher,garbage disposal,parking,refrigerator,storage,view",1,2,"cats,dogs",1100,milwaukee,wi,999
-NA,NA,2,none,1100,baltimore,md,990
+NA,0,2,none,1100,baltimore,md,990
 luxury,1.5,2,"cats,dogs",1100,raleigh,nc,990
 NA,2,3,none,1100,jacksonville,al,950
 "parking,playground,pool",2,2,none,1100,marietta,ga,925
@@ -8652,7 +8652,7 @@ NA,2.5,3,none,1350,lubbock,tx,1300
 "alarm,patio/deck,pool,washer dryer",2,3,"cats,dogs",1350,aliquippa,pa,1300
 "fireplace,parking,washer dryer",1.5,3,none,1350,toledo,oh,1250
 "dishwasher,internet access,parking,refrigerator",2,2,none,1350,pontiac,mi,1200
-NA,NA,3,"cats,dogs",1350,springfield,mo,1195
+NA,0,3,"cats,dogs",1350,springfield,mo,1195
 "gym,pool,tennis,washer dryer",2,3,none,1350,yorktown,va,1189
 "fireplace,parking,washer dryer",1.5,2,none,1350,toledo,oh,1175
 NA,2,2,none,1350,baton rouge,la,1100
@@ -8749,7 +8749,7 @@ NA,1,2,none,1397,shaker heights,oh,795
 "parking,storage",2,4,none,1400,santa cruz,ca,3750
 "dishwasher,elevator,parking,refrigerator",2,2,dogs,1400,washington,dc,3495
 NA,2.5,2,"cats,dogs",1400,fremont,ca,3100
-NA,NA,0,none,1400,richmond,ca,3000
+NA,0,0,none,1400,richmond,ca,3000
 NA,2,2,none,1400,los angeles,ca,2995
 NA,1.5,2,cats,1400,null,null,2995
 "cable or satellite,dishwasher,refrigerator",1,3,"cats,dogs",1400,larchmont,ny,2695
@@ -8872,7 +8872,7 @@ NA,2.5,3,"cats,dogs",1440,ankeny,ia,1367
 NA,2.5,3,"cats,dogs",1440,johnston,ia,1367
 "dishwasher,refrigerator",2,3,"cats,dogs",1440,houston,tx,1325
 "dishwasher,garbage disposal,patio/deck,refrigerator",2,3,"cats,dogs",1440,greenwood,in,1099
-NA,NA,0,none,1440,grand forks,nd,1000
+NA,0,0,none,1440,grand forks,nd,1000
 "basketball,pool,tennis",2,3,"cats,dogs",1441,issaquah,wa,2285
 "ac,cable or satellite,clubhouse,dishwasher,gym,internet access,patio/deck,playground,pool,storage,washer dryer",2,3,none,1443,mebane,nc,1179
 "cable or satellite,gym,internet access,parking,storage",2,3,"cats,dogs",1443,hillsborough,nc,1135
@@ -9488,7 +9488,7 @@ NA,2.5,3,none,1884,birmingham,mi,4525
 "dishwasher,parking,patio/deck",3,4,"cats,dogs",1885,chicago,il,3454
 "dishwasher,refrigerator",2,4,"cats,dogs",1886,fort worth,tx,1725
 patio/deck,2,3,none,1886,norman,ok,1250
-NA,NA,2,"cats,dogs",1890,pittsburgh,pa,2835
+NA,0,2,"cats,dogs",1890,pittsburgh,pa,2835
 "dishwasher,fireplace,refrigerator",2,3,"cats,dogs",1890,hendersonville,tn,1775
 "dishwasher,refrigerator",2,4,"cats,dogs",1891,irmo,sc,1449
 "dishwasher,refrigerator",2,2,"cats,dogs",1892,seattle,wa,5500
@@ -9657,7 +9657,7 @@ NA,2,3,none,2115,post falls,id,1900
 NA,2,3,dogs,2120,seattle,wa,2395
 NA,2,3,"cats,dogs",2120,tampa,fl,2150
 NA,2,3,none,2122,reeds spring,mo,1350
-NA,NA,0,none,2122,lubbock,tx,1325
+NA,0,0,none,2122,lubbock,tx,1325
 "cable or satellite,patio/deck",2,4,"cats,dogs",2123,brandon,sd,1250
 "cable or satellite,dishwasher,internet access,patio/deck,refrigerator,storage,washer dryer,wood floors",3,5,none,2126,washington,dc,3800
 NA,3,4,"cats,dogs",2128,hinesville,ga,1325
@@ -9997,5 +9997,5 @@ NA,4,6,none,5921,saint george,ut,3000
 NA,4,5,none,6300,edina,mn,6000
 NA,8,6,none,8716,montecito,ca,25000
 NA,8.5,6,none,11318,potomac,md,11000
-"basketball,cable or satellite,doorman,hot tub,internet access,parking,playground,pool,storage,washer dryer",NA,1,none,40000,new york,ny,4790
+"basketball,cable or satellite,doorman,hot tub,internet access,parking,playground,pool,storage,washer dryer",0,1,none,40000,new york,ny,4790
 "gym,patio/deck",1,1,none,880,lawrenceville,ga,1009
