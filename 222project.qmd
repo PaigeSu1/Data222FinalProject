@@ -1,0 +1,127 @@
+---
+title: "DATA 222 - MODEL"
+author: "Ritika Lama"
+format: pdf
+editor: visual
+---
+
+```{r dataset}
+library(car)
+library(randomForest)
+library(tidyverse)
+apartments <- read_csv("C:/Users/ritik/OneDrive/Desktop/s8/data222/Final Project/RentWIP_cleaned.csv")
+head(apartments)
+```
+
+## 1. Test-train split
+
+```{r test-train}
+set.seed(123)
+train <- apartments %>% sample_frac(.70)
+test <- anti_join(apartments, train)
+```
+
+## 2. Linear Regression Model with STATE
+
+```{r lrm}
+lin_model<- lm(monthly_price ~ state, data = train)
+summary(lin_model)
+```
+
+This linear model computes the average price of items in various states within the United States. Here, the constant value, 994.241, is the mean price for the base or reference state, and the value of state gives the difference between the price of the reference state and the state under consideration. From the above table, one can conclude that stateCA = 1864.864 implies that California is \$1865 higher than the reference state, while stateWV=-199.241 implies that West Virginia is about \$199 lower. Based on the small p-values (\<0.05), the significant variables include CA, DC, FL, HI, MA, NJ, NY, and WA because they are the primary states within the United States. On average, predictions could be inaccurate by \$994. The high R-squared value of 0.2297 implies that 23% of the variance in the price is due to the state variable, hence other causes.
+
+## 3. Linear Regression Model with square_feet, bedrooms, bathrooms
+
+```{r}
+lin_model2<- lm(monthly_price ~ square_feet + bedrooms + bathrooms, data = train)
+summary(lin_model2)
+```
+
+The second multiple linear regression model takes square_feet, bedrooms, and bathrooms as independent variables and price as the dependent variable. It is statistically significant (p \< 2.2e-16). One extra square foot is associated with an increase in price by about \$0.91. Therefore, the bigger house, the higher its price. In addition, one extra bathroom will increase price by \$273.52. Hence, bathrooms positively impact property prices. A negative coefficient for bedrooms (-\$166.30) implies that the more bedrooms in property with equal square feet and bathrooms, the smaller rooms they have, resulting in reduced property prices. Interception (\$542.42) represents a predicted price when all predictors are zeros. However, it is not a realistic prediction. Furthermore, the R-squared of 0.2021 indicates that predictors explain 20.21% of the total variability of price. Consequently, it is important to consider other aspects like property condition or area that significantly impact price along with the presented predictors.
+
+## 3. Testing with the linear model
+
+```{r linear-test}
+linear_test <- predict(lin_model2, newdata = test)
+actual <- test$monthly_price
+pred <- linear_test
+
+rmse <- sqrt(mean((actual - pred)^2, na.rm = TRUE))
+mae <- mean(abs(actual - pred), na.rm = TRUE)
+
+rmse
+mae
+```
+
+The above are the values of the measures used to evaluate the performance of the second model: RMSE = 799.56 and MAE = 515.99. This implies that the model's estimates are inaccurate by approximately \$516 on average, while the average error estimate will be about \$800 if higher penalties are put on larger errors.
+
+## 4. Random Forest Model
+
+```{r random-forest}
+train_clean <- na.omit(train)
+rf_model <- randomForest(monthly_price ~ ., data = train_clean, ntree = 500)
+rf_model
+```
+
+Since the Random Forest model included all the predictors from train_clean, it successfully predicted the variable "monthly_price". The type of the response variable is numeric, thus, this model is called a regression model, while not classification. The number of trees grown is 500; this provides more stability and reliability. At each split of the tree, only two randomly chosen predictors were considered. Squared residuals' mean (811328.5) indicates the average squared error of prediction, and smaller values correspond to higher accuracy. In addition, 31.65% of variance in the monthly rent was accounted for by this model, indicating that some information about this variable can be found using predictors, while another share of variance remains dependent on additional factors.
+
+## 5. Testing with Random Forest
+
+```{r rf-test}
+test_clean <- na.omit(test)
+rf_test <- predict(rf_model, newdata = test_clean)
+actual_rf <- test_clean$monthly_price
+pred_rf <- rf_test
+
+rmse_rf <- sqrt(mean((actual_rf - pred_rf)^2))
+mae_rf <- mean(abs(actual_rf - pred_rf))
+
+rmse_rf
+mae_rf
+```
+
+The output of this model gave the RMSE value as 700.48, meaning that the prediction made for monthly rent differs by \$700 on average. An MAE value of 399.57 indicates an average error of about \$400 per month. It can be inferred that this model provides reasonable predictions with typical prediction errors ranging from hundreds of dollars.
+
+## CART modl
+
+```{r}
+library(rpart)
+library(rpart.plot)
+
+cart_model <- rpart(
+  monthly_price ~ bathrooms+bedrooms+pets_allowed+square_feet,
+  data = train_clean
+)
+
+cart_model
+
+cart_pred <- predict(cart_model, newdata = test_clean)
+
+cart_rmse <- sqrt(mean((test_clean$monthly_price - cart_pred)^2))
+cart_mae <- mean(abs(test_clean$monthly_price - cart_pred))
+
+cart_rmse
+cart_mae
+```
+
+According to the CART model, the RMSE value is equal to 837.76, meaning that there is an average difference of around \$838 between the forecasted monthly rents and the real values considering that large discrepancies carry more significance. An MAE value of 493.86 indicates that the average error is around \$494 per month. These relatively high error values indicate that the CART model is less precise than the Random Forest model; however, it can still be used for its interpretable nature and identification of significant variables.
+
+```{r}
+# Tree Plot
+rpart.plot(cart_model)
+```
+
+```{r}
+# Actual vs Predicted Plot
+ggplot(data.frame(
+  Actual = test_clean$monthly_price,
+  Predicted = cart_pred
+), aes(x = Actual, y = Predicted)) +
+  geom_point(alpha = 0.5) +
+  geom_abline() +
+  labs(
+    title = "CART: Actual vs Predicted Monthly Rent"
+  ) 
+```
+
+## [Conclusion: The performance of the Random Forest model exceeded that of the CART model due to the smaller amount of error, indicating greater accuracy of predicting the monthly rent prices. It should be expected that the former model would perform better because the Random Forest is based on multiple decision trees, making it capable of finding more complicated relationships, whereas the CART algorithm makes use of one decision tree only. Nevertheless, the latter algorithm was also beneficial for analysis because of the greater interpretability it provided, allowing us to understand the impact of certain features, such as square footage, number of bathrooms and bedrooms, as well as pets allowed. Some features like amenities or city name were excluded from the CART model due to many unique levels.]{style="color:Purple;"}
