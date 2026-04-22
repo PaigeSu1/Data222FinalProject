@@ -9,8 +9,7 @@ editor: visual
 library(car)
 library(randomForest)
 library(tidyverse)
-apartments <- read_csv("C:/Users/ritik/OneDrive/Desktop/s8/data222/Final Project/RentWIP_cleaned.csv")
-head(apartments)
+apartments <- read_csv("RentWIP_cleaned.csv")
 ```
 
 ## 1. Test-train split
@@ -28,7 +27,7 @@ lin_model<- lm(monthly_price ~ state, data = train)
 summary(lin_model)
 ```
 
-This linear model computes the average price of items in various states within the United States. Here, the constant value, 994.241, is the mean price for the base or reference state, and the value of state gives the difference between the price of the reference state and the state under consideration. From the above table, one can conclude that stateCA = 1864.864 implies that California is \$1865 higher than the reference state, while stateWV=-199.241 implies that West Virginia is about \$199 lower. Based on the small p-values (\<0.05), the significant variables include CA, DC, FL, HI, MA, NJ, NY, and WA because they are the primary states within the United States. On average, predictions could be inaccurate by \$994. The high R-squared value of 0.2297 implies that 23% of the variance in the price is due to the state variable, hence other causes.
+This linear regression model estimates monthly rent based on state. The intercept of 981.40 represents the average monthly rent for the reference state. Each state coefficient shows how much higher or lower that state’s rent is compared to the reference state. For example, California is about 1815.07 dollars higher, Washington is about 792.99 dollars higher, and New York is about 698.34 dollars higher than the reference state. The model is statistically significant overall, and the R-squared value of 0.2314 means that about 23.14 percent of the variation in monthly rent is explained by state alone.
 
 ## 3. Linear Regression Model with square_feet, bedrooms, bathrooms
 
@@ -37,9 +36,9 @@ lin_model2<- lm(monthly_price ~ square_feet + bedrooms + bathrooms, data = train
 summary(lin_model2)
 ```
 
-The second multiple linear regression model takes square_feet, bedrooms, and bathrooms as independent variables and price as the dependent variable. It is statistically significant (p \< 2.2e-16). One extra square foot is associated with an increase in price by about \$0.91. Therefore, the bigger house, the higher its price. In addition, one extra bathroom will increase price by \$273.52. Hence, bathrooms positively impact property prices. A negative coefficient for bedrooms (-\$166.30) implies that the more bedrooms in property with equal square feet and bathrooms, the smaller rooms they have, resulting in reduced property prices. Interception (\$542.42) represents a predicted price when all predictors are zeros. However, it is not a realistic prediction. Furthermore, the R-squared of 0.2021 indicates that predictors explain 20.21% of the total variability of price. Consequently, it is important to consider other aspects like property condition or area that significantly impact price along with the presented predictors.
+This multiple linear regression model uses square footage, bedrooms, and bathrooms to predict monthly rent. One additional square foot increases rent by about 0.27 dollars, and one additional bathroom increases rent by about 482.15 dollars. Bedrooms have a small negative effect (-15.53) and are not statistically significant, meaning they do not strongly affect rent after controlling for size and bathrooms. The R-squared value is 0.1572, meaning the model explains about 15.72 percent of the variation in rent.
 
-## 3. Testing with the linear model
+## 4. Testing with the linear model
 
 ```{r linear-test}
 linear_test <- predict(lin_model2, newdata = test)
@@ -53,9 +52,9 @@ rmse
 mae
 ```
 
-The above are the values of the measures used to evaluate the performance of the second model: RMSE = 799.56 and MAE = 515.99. This implies that the model's estimates are inaccurate by approximately \$516 on average, while the average error estimate will be about \$800 if higher penalties are put on larger errors.
+The model performance shows RMSE = 953.77 and MAE = 536.54. This means predictions are off by about 537 dollars on average, and larger errors increase RMSE to about 954 dollars. This indicates the linear model is not very accurate.
 
-## 4. Random Forest Model
+## 5. Random Forest Model
 
 ```{r random-forest}
 train_clean <- na.omit(train)
@@ -63,9 +62,9 @@ rf_model <- randomForest(monthly_price ~ ., data = train_clean, ntree = 500)
 rf_model
 ```
 
-Since the Random Forest model included all the predictors from train_clean, it successfully predicted the variable "monthly_price". The type of the response variable is numeric, thus, this model is called a regression model, while not classification. The number of trees grown is 500; this provides more stability and reliability. At each split of the tree, only two randomly chosen predictors were considered. Squared residuals' mean (811328.5) indicates the average squared error of prediction, and smaller values correspond to higher accuracy. In addition, 31.65% of variance in the monthly rent was accounted for by this model, indicating that some information about this variable can be found using predictors, while another share of variance remains dependent on additional factors.
+Since the Random Forest model included all the predictors from train_clean, it successfully predicted the variable "monthly_price". The type of the response variable is numeric, thus, this model is called a regression model, while not classification. The number of trees grown is 500; this provides more stability and reliability. At each split of the tree, only two randomly chosen predictors were considered. Squared residuals' mean (811328.5) indicates the average squared error of prediction, and smaller values correspond to higher accuracy. In addition, 31.58% of variance in the monthly rent was accounted for by this model, indicating that some information about this variable can be found using predictors, while another share of variance remains dependent on additional factors.
 
-## 5. Testing with Random Forest
+## 6. Testing with Random Forest
 
 ```{r rf-test}
 test_clean <- na.omit(test)
@@ -82,7 +81,7 @@ mae_rf
 
 The output of this model gave the RMSE value as 700.48, meaning that the prediction made for monthly rent differs by \$700 on average. An MAE value of 399.57 indicates an average error of about \$400 per month. It can be inferred that this model provides reasonable predictions with typical prediction errors ranging from hundreds of dollars.
 
-## CART modl
+## 7. CART model
 
 ```{r}
 library(rpart)
@@ -124,4 +123,4 @@ ggplot(data.frame(
   ) 
 ```
 
-## [Conclusion: The performance of the Random Forest model exceeded that of the CART model due to the smaller amount of error, indicating greater accuracy of predicting the monthly rent prices. It should be expected that the former model would perform better because the Random Forest is based on multiple decision trees, making it capable of finding more complicated relationships, whereas the CART algorithm makes use of one decision tree only. Nevertheless, the latter algorithm was also beneficial for analysis because of the greater interpretability it provided, allowing us to understand the impact of certain features, such as square footage, number of bathrooms and bedrooms, as well as pets allowed. Some features like amenities or city name were excluded from the CART model due to many unique levels.]{style="color:Purple;"}
+The Random Forest model performed best because it had the lowest RMSE and MAE, meaning it gave the most accurate predictions. The CART model was less accurate but easier to interpret. The linear regression models helped explain relationships between variables but were less accurate for prediction. Overall, Random Forest is best for prediction, while CART and linear regression are better for understanding the data.
