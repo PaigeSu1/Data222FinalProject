@@ -10,6 +10,13 @@ editor: source
 
 
 
+## Abstract
+
+This project analyzes apartment rental prices using a dataset of housing listings. The goal was to understand which factors influence monthly rent and to build predictive models. We applied three models: linear regression, Random Forest, and CART. Linear regression helped explain relationships between variables such as square footage, bedrooms, and bathrooms, but had lower predictive accuracy. The Random Forest model performed best, achieving the lowest error (RMSE ≈ 700, MAE ≈ 400), indicating more accurate predictions. The CART model was less accurate but provided clear and interpretable decision rules. Overall, Random Forest was the most effective model for predicting rental prices.
+
+
+
+
 ```{r 01}
 library(tidyverse)
 library(readxl)
@@ -17,7 +24,7 @@ library(dplyr)
 library(ggplot2)
 library(tidyr)
 library(readr)
-RentWIP <- read_csv("C:/Users/kongy/Downloads/apartment+for+rent+classified/apartments_for_rent_classified_10K/apartments_for_rent_classified_10K.csv")
+apartments <- read_csv("RentWIP_cleaned.csv")
 ```
 
 
